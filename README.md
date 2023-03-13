@@ -141,20 +141,67 @@ python inference_video.py --labelmap_path label_map.pbtxt --model_path experimen
 ## Submission Template
 
 ### Project overview
-This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
+The objective of this project is to explore and augment a given driving image dataset and test a Single Shot Detector (SSD) Resnet50 Convolutional Neural Network (CNN) on the augmented dataset. The project involves changing different parameters to improve the performance of the CNN. The driving image dataset is a collection of images taken from a car's front-facing camera.
+
+The first step in the project is to explore the characteristics of the images in the dataset. This involves analyzing the resolution, color distribution, and other properties of the images. Understanding the characteristics of the images helps in selecting appropriate augmentation techniques that can enhance the dataset's diversity.
+
+After analyzing the image characteristics, the next step is to augment the dataset using different techniques. Some of the techniques that can be used to augment the dataset include rotation, cropping, flipping, and adjusting the brightness and contrast. By augmenting the dataset, we can improve the CNN's ability to generalize to new images.
+
+Once the dataset is augmented, the next step is to test the SSD Resnet50 CNN on the augmented dataset. The CNN is trained on the augmented dataset and tested on a validation set. The performance of the CNN is measured in terms of accuracy, precision, recall, and F1-score.
+
+Finally, the project involves changing different parameters in the CNN to improve its performance. The parameters that can be changed include the learning rate, batch size, number of epochs, and the optimizer used. By changing these parameters, we can improve the CNN's ability to detect objects in the images.
 
 ### Set up
-This section should contain a brief description of the steps to follow to run the code for this repository.
+
+The config files are placed in experiments/reference
+old is the initial one with some augmentations
+pipeline2.config uses the rms_prop_optimizer 
+pipeline3.config uses adam_optimizer 
+
 
 ### Dataset
 #### Dataset analysis
-This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
-#### Cross validation
-This section should detail the cross validation strategy and justify your approach.
+In this task, I programmed a function in Python to visualize the images and bounding boxes of the given dataset. After that, you developed functions to analyze the darkness of the images, their sizes, the variance to locate the low visibility images, and the density of objects in the image.
+
+Unfortunately, due to the poor workspace provided, I was unable to get any graphic representation of the data.
+
+Analyzing the darkness of images is important because it can affect the accuracy of object detection models.
+
+Analyzing the sizes and density of objects in the images can help us understand how objects are distributed in the images. This can help us optimize the object detection model to better identify and locate objects in the images.
 
 ### Training
 #### Reference experiment
-This section should detail the results of the reference experiment. It should includes training metrics and a detailed explanation of the algorithm's performances.
+I trained the reference CNN and saw the "not so good" results. Unfortunately I didnt make any captures of that because I didnt know I would need them later for the submission, and later when I tried to train it again to make the captures and documentation, the workspace didnt work anymore because of a lot of memory problems, performance problems... and it was impossible for me to do it.
 
 #### Improve on the reference
-This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
+1. Data Augmentations
+
+Data augmentation techniques are an essential component of training deep learning models, particularly in the field of object recognition for autonomous driving. These techniques are used to create additional training data from the existing dataset by applying various transformations to the original images. This has the advantage of improving the generalization capability of the model, making it more robust and less prone to overfitting.
+
+Horizontal_flip is used to create a mirror image of the original image, which is particularly useful for object detection in autonomous driving scenarios where objects can appear from any direction.
+
+Adjusting brightness and contrast helps to simulate different lighting conditions, which is crucial in the real-world scenarios as lighting conditions can vary widely.
+
+Gaussian noise is used to simulate the effect of sensor noise, which is present in real-world datasets. By adding this type of noise to the images, the model becomes more robust to noise in the input data.
+
+Adjusting saturation is important for dealing with images that have color variations due to different lighting conditions.
+
+Image scaling and cropping techniques can be used to simulate different perspectives of the same object, which can help the model to better understand the object's features and characteristics. This is particularly important in autonomous driving scenarios where the same object can appear in different sizes and orientations.
+
+Overall, using these data augmentation techniques can improve the accuracy and robustness of the object recognition model for autonomous driving.
+
+Using the data augmentations the performance of the CNN improved significantly
+![image](https://user-images.githubusercontent.com/38068231/224650704-22dc0e51-f0d9-450d-928f-b2bbb4adf7e5.png)
+
+2. Improving the CNN
+In this task where I tried to improve an SSD Resnet50 model, I experimented with different optimizers, namely SGD and Adam, to see their impact on the model's performance.
+
+First, I tried the SGD optimizer and obtained very good results. This means that the model's performance improved significantly, possibly because the optimizer was better suited for the problem at hand. SGD works well with large datasets and can converge faster than other optimizers.
+![image](https://user-images.githubusercontent.com/38068231/224650790-4826c7d7-23fa-4a18-8c92-2dc3bcc1acb7.png)
+
+Next, I tried the Adam optimizer but got not so good results. This suggests that the optimizer may not have been the best choice for this problem. Adam optimizer is known for its ability to converge quickly, especially when the gradients are sparse, but it may not always lead to optimal results in all cases.
+
+![image](https://user-images.githubusercontent.com/38068231/224651431-1ff3b095-8c71-411d-ac85-b6695e59ead6.png)
+
+
+Overall, the experiment highlights the importance of trying out different optimization techniques to achieve the best results for a given problem. However, it's important to keep in mind that the performance of the model depends on various factors, including the dataset, hyperparameters, and the optimization algorithm, and there may not be a one-size-fits-all solution.
