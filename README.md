@@ -136,7 +136,7 @@ This should create a new folder `experiments/reference/exported/saved_model`. Yo
 Finally, you can create a video of your model's inferences for any tf record file. To do so, run the following command (modify it to your files):
 ```
 python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /data/waymo/testing/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
-```
+
 
 ## Submission Template
 
@@ -205,3 +205,5 @@ Next, I tried the Adam optimizer but got not so good results. This suggests that
 
 
 Overall, the experiment highlights the importance of trying out different optimization techniques to achieve the best results for a given problem. However, it's important to keep in mind that the performance of the model depends on various factors, including the dataset, hyperparameters, and the optimization algorithm, and there may not be a one-size-fits-all solution.
+
+In conclusion, I would have loved to investigate further and make more changes to the CNN model and compare the results. I wanted to try aswell other architectures, like the Faster R-CNN Inception ResNet V2 640x640. However, the performance of the workspace provided by Udacity is severely limited, making it impossible to work efficiently. Therefore, I had to submit my work at this stage to avoid wasting too much time. As I have a time limit of five months to complete the course, I cannot afford to waste any more time. Otherwise, I will have to pay more, which is not my intention.
